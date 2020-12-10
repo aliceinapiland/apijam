@@ -20,6 +20,8 @@ This material is divided into different API Jam modules, based on the API Manage
 * Lab 4 - Developer Experience
 * Lab 5 - Measure API Program Success with Apigee Analytics
 
+Try the [Codelab](./ForCodeLabs/modules/apijam-mod-1)
+
 ** **
 
 ### [Module 2a - API Security Part 1](./Module-2a) 
