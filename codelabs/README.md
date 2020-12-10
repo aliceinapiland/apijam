@@ -13,7 +13,7 @@ This material is divided into different API Jam modules, based on the API Manage
 
 **Note - If you are using this repository during a virtual or in-person API Jam, please reference the appropriate module(s) based on instructor instructions.**
 
-### [Module 1 - API Management](https://aliceinapiland.github.io/apijam/ForCodeLabs/modules/apijam-mod-1) 
+### [Module 1 - API Management](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-1) 
 Contents:
 * Lab 1 - Create a Reverse Proxy with OpenAPI specification
 * Lab 2 - Apps, API Products & API Keys
@@ -23,7 +23,7 @@ Contents:
 
 ** **
 
-### [Module 2 - API Security](https://aliceinapiland.github.io/apijam/ForCodeLabs/modules/apijam-mod-2)
+### [Module 2 - API Security](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-2)
 Contents:
 * Introduction to API Security
 * Lab 1 - Throttle your API Traffic to prevent DoS, using Apigee Spike Arrest
@@ -34,7 +34,7 @@ Contents:
 
 ** **
 
-### [Module 3 - Advanced API Management](https://aliceinapiland.github.io/apijam/ForCodeLabs/modules/apijam-mod-3)
+### [Module 3 - Advanced API Management](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-3)
 Contents:
 * Lab 1 - Global policy management using Shared Flows, Flow Hooks and Flow Callouts
 * Lab 2 - Build composite APIs using Service Callouts and Proxy Chaining
@@ -46,7 +46,7 @@ Contents:
 
 ** **
 
-You can start with [Module 1](https://aliceinapiland.github.io/apijam/ForCodeLabs/modules/apijam-mod-1)
+You can start with [Module 1](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-1)
 
 #### Apigee Community 
 If you have any questions/comments please visit https://community.apigee.com/index.html
