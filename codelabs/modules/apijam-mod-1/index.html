@@ -294,12 +294,12 @@
 <li>The policy will be added after any policies you previously had in the Request flow. Since we likely want this to occur first, drag the new policy to be the leftmost of any policies in the flow.</li>
 <li>With the <em>Verify API Key</em> policy selected, you can see its configuration (the default policy configuration is below). Note that the API Key is being retrieved from the context as the variable <em>request.queryparam.apikey</em>. This is the default but the policy can be configured to retrieve the key from any parameter you prefer, for example, <em>request.header.client-id</em>, etc. (note: if you plan to use the Apigee trace tool for the lab, only query parameters are suppoted but if you have an alternative client such as cURL or Postman, feel free to use any parameter you like)</li>
 </ul>
-<p><code><?xml version="1.0" encoding="UTF-8" standalone="yes"?></code></p>
-<p><code><VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key"></code></p>
-<p><code>    <DisplayName>Verify API Key</DisplayName></code></p>
-<p><code>    <Properties/></code></p>
-<p><code>    <APIKey ref="request.queryparam.apikey"/></code></p>
-<p><code></VerifyAPIKey></code></p>
+<pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;
+&lt;VerifyAPIKey async=&#34;false&#34; continueOnError=&#34;false&#34; enabled=&#34;true&#34; name=&#34;Verify-API-Key&#34;&gt;
+    &lt;DisplayName&gt;Verify API Key&lt;/DisplayName&gt;
+    &lt;Properties/&gt;
+    &lt;APIKey ref=&#34;request.queryparam.apikey&#34;/&gt;
+&lt;/VerifyAPIKey&gt;</code></pre>
 <p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/da9ba56f8d2d8507.png"></p>
 <ul>
 <li>Save the API proxy.</li>
