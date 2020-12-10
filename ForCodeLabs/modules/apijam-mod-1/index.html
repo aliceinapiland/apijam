@@ -1,0 +1,440 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Module 1 - API Management Fundamentals</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="apijam-mod-1"
+                  title="Module 1 - API Management Fundamentals"
+                  environment="web"
+                  feedback-link="https://github.com/aliceinapiland/apijam/tree/master/ForCodeLabs/apijam-mod-1">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p>This is the supporting material for a hands-on workshop that introduces you to fundamental API Management concepts and the Apigee API Management Platform. We call this event an &#34;Apigee API Jam&#34;. This module - the &#34;Module 1&#34; - focuses on giving attendees an overall understanding of how to build a successful API program with a well managed developer ecosystem. Attendees will learn how to manage their APIs across all phases of the API Lifecycle - including API design, API Security, Developer consumption, as well as API Analytics and Monitoring.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/6538377127d433e6.png"></p>
+<p>All of the material here is released under the <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/LICENSE.md" target="_blank">Apache 2.0 license</a></p>
+<h3 is-upgraded><a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs" target="_blank"><strong>Labs</strong></a></h3>
+<ol type="1" start="1">
+<li>API Design &amp; Creation - Design OAS &amp; Create a Reverse Proxy with the OpenAPI specification <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">Link</a></li>
+<li>API Products, Apps &amp; API Keys - Securing APIs with API Keys, bundle APIs into API Products and understand the association between Apps, API Products &amp; API Keys <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%202" target="_blank">Link</a></li>
+<li>Rate Limiting: Rate Limit API Consumption based on API Product tier quotas. <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%203" target="_blank">Link</a></li>
+<li>App Developer Experience - Publish API Products Catalog through a self-service Developer Portal. Test App Developer on-boarding experience &amp; API consumption. Restrict access to resources using Teams and Audience entitlements. <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%204" target="_blank">Link</a></li>
+<li>API Analytics - Measure API Program Success with Apigee Analytics <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%205" target="_blank">Link</a></li>
+</ol>
+<p>You can start with the first lab <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">1. API Design - Design &amp; Create an API Proxy with OpenAPI specification</a></p>
+<h4 is-upgraded><strong>Apigee Community</strong></h4>
+<p>If you have any questions/comments please visit <a href="https://community.apigee.com/index.html" target="_blank">https://community.apigee.com/index.html</a></p>
+<h5 is-upgraded><strong>This repository is not an official Google or Apigee product. This repository is used for educational/training purposes only.</strong></h5>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lab 1 - Design &amp; Create an API Proxy with OpenAPI Specification" duration="0">
+        <p><em>Duration : 15 mins</em></p>
+<p><em>Persona : API Team</em></p>
+<p><strong>Use case</strong></p>
+<p>You have a requirement to create a reverse proxy to handle requests from the Internet and forward them to an existing service. You have decided to follow a design first approach and built a reusable component, a specification which can be used to describe the API contract, generate API documentation, generate API test cases, etc., using the OpenAPI Specification. You would like to generate an Apigee API Proxy by using the OpenAPI Specification (fka: Swagger) instead of building the API Proxy from scratch.</p>
+<p><strong>How can Apigee API Management help?</strong></p>
+<p>Apigee enables you to quickly expose services as APIs. You do this by creating an <a href="https://docs.apigee.com/api-platform/fundamentals/understanding-apis-and-api-proxies#whatisanapiproxy" target="_blank">API proxy</a>, which provides a facade for the service that you want to expose, such as existing API endpoints, generic HTTP services, or applications (such as Node.js). The API proxy decouples your service implementation from the API endpoint that developers consume. This shields developers from future changes to your services as well as implementation complexities. As you update services, developers, insulated from those changes, can continue to call the API, uninterrupted. On Apigee, the API Proxy is also where runtime policy configuration is applied for API Management capabilites. For further information, please see: <a href="https://docs.apigee.com/api-platform/fundamentals/understanding-apis-and-api-proxies#whatisanapiproxy" target="_blank">Understanding APIs and API Proxies</a>.</p>
+<p class="image-container"><img alt="Image of Apigee Proxy flow execution order" style="width: 624.00px" src="img/4e1bea9c40d2fea7.png"></p>
+<p>Apigee also supports the <a href="https://github.com/OAI/OpenAPI-Specification" target="_blank">OpenAPI specification</a> out of the box, allowing you to auto-generate API Proxies. Apigee has a built-in OpenAPI specification editor and store which you can use to design and maintain your OpenAPI specifications.</p>
+<p class="image-container"><img alt="Image of Apigee OpenAPI Spec editor" style="width: 624.00px" src="img/173571ae949f6c6e.png"></p>
+<p>In this lab, we will learn how to</p>
+<ul>
+<li>design an OpenAPI specification for an existing HTTP service and store it within the Apigee platform, and</li>
+<li>create an API proxy that routes inbound requests to an existing HTTP service.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pre-requisites" duration="0">
+        <ul>
+<li>Basic understanding of <a href="https://github.com/OAI/OpenAPI-Specification" target="_blank">OpenAPI Specification</a> (FKA: Swagger)</li>
+<li>Access to an HTTP client to test the API (eg. cURL, Postman, etc.). If you do not have access to one, you can use the <a href="https://docs.apigee.com/api-platform/debug/using-trace-tool-0" target="_blank">Apigee Trace Tool</a> or the <a href="https://apigee-restclient.appspot.com/" target="_blank">Apigee REST client</a>.</li>
+</ul>
+<p>Note: During this workshop, as you may be working within an <a href="https://docs.apigee.com/api-platform/fundamentals/apigee-edge-organization-structure" target="_blank">Apigee Organization (Org)</a> that is shared by multiple users. Please prefix all asset names within the Org with your initials. For example, Spec name = {your-initials}_{spec name}, API proxy name = {your-initials}_{proxy name}, etc.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create an OpenAPI Specification" duration="0">
+        <p>During the course of this lab, the sample HTTP service we will expose as an API endpoint is the Hipster Products service located at <a href="http://cloud.hipster.s.apigee.com/products" target="_blank">http://cloud.hipster.s.apigee.com/products</a>. First, we are going to design and create an OpenAPI specification for the different resource endpoints, i.e. /products and /products/{productId}.</p>
+<ol type="1" start="1">
+<li>Go to <a href="https://apigee.com/edge" target="_blank">https://apigee.com/edge</a> and log in. This is the Apigee management UI.</li>
+<li>Select Develop → Specs in the side navigation menu</li>
+</ol>
+<p class="image-container"><img alt="Image describing how to navigate to Apigee OpenAPI Spec editor using menu. Home - Develop - Specs" style="width: 624.00px" src="img/5c5dc322912dc650.png"></p>
+<ol type="1" start="3">
+<li>As we have a pre-designed sample of the spec available for this lab, we will be importing it into your Apigee Org&#39;s Spec Store. Click +Spec. Click on Import URL to add a new spec from existing source.</li>
+</ol>
+<p class="image-container"><img alt="Image describing how to import an OpenAPI Spec into Apigee via URL" style="width: 428.00px" src="img/985f243c562d2617.png"></p>
+<ol type="1" start="4">
+<li>Enter spec details. Replace {your-initials} with the initials of your name.</li>
+</ol>
+<ul>
+<li>File Name: {your-initials}_hipster_products_api_spec</li>
+<li>URL: <a href="https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Resources/products-catalog-spec.yaml" target="_blank">https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Resources/products-catalog-spec.yaml</a></li>
+</ul>
+<p class="image-container"><img alt="Image describing the Import OpenAPI Spec wizard fields" style="width: 624.00px" src="img/2f50d322bd6f20d8.png"></p>
+<ol type="1" start="5">
+<li>Verify the values and click Import. Spec has been imported into Apigee and is ready to use. You should see your spec in the list. For example,</li>
+</ol>
+<p class="image-container"><img alt="Image showing newly imported OpenAPI Spec in the Specs view" style="width: 624.00px" src="img/78fe75242691b5bc.png"></p>
+<ol type="1" start="6">
+<li>Click on {your-initials}_hipster_products_api_spec from the list to access the OpenAPI spec editor &amp; interactive documentation that lists API details &amp; API Resources.</li>
+</ol>
+<p class="image-container"><img alt="Image of OpenAPI Spec editor.  Newly imported spec is loaded in the editor" style="width: 624.00px" src="img/6a4d7f82b959cd78.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create an API Proxy" duration="0">
+        <ol type="1" start="1">
+<li>It&#39;s time to create Apigee API Proxy from an OpenAPI Specification. Click on Develop → API Proxies from side navigation menu.</li>
+</ol>
+<p class="image-container"><img alt="Image describing how to navigate to the API Proxies view.  Home - Develop - API Proxies" style="width: 624.00px" src="img/b6d588cf30c5cdde.png"></p>
+<ol type="1" start="2">
+<li>Click +Proxy The Build a Proxy wizard is invoked.</li>
+</ol>
+<p class="image-container"><img alt="Image showing the location of the button to create an API Proxy." style="width: 624.00px" src="img/fc1849ab77ed6bc0.png"></p>
+<ol type="1" start="3">
+<li>Select Reverse proxy, Click on Use OpenAPI below reverse proxy option.</li>
+</ol>
+<p class="image-container"><img alt="Image showing selection of API Proxy type.  User has selected Reverse Proxy and clicked &#34;Use OpenAPI Spec&#34;" style="width: 624.00px" src="img/7baa5650ed13b5b2.png"></p>
+<ol type="1" start="4">
+<li>You should see a popup with list of Specs. Select {your-initials}_hipster_products_api_spec and click Select.</li>
+</ol>
+<p class="image-container"><img alt="Image showing selection of previously imported OpenAPI Spec from list of available specs." style="width: 624.00px" src="img/35820f35c251e2e9.png"></p>
+<ol type="1" start="5">
+<li>Enter details in the proxy wizard. Replace {your-initials} with the initials of your name.</li>
+</ol>
+<ul>
+<li>Proxy Name: {your_initials}_Hipster-Products-API</li>
+<li>Proxy Base Path: /v1/{your_initials}_hipster-products-api</li>
+<li>Existing API: Observe the field value which is auto filled from OpenAPI Spec.</li>
+</ul>
+<p class="image-container"><img alt="Image showing filling out of Proxy details.  User has added his or her initials as the prefix for &#34;Name&#34; and &#34;Base path&#34; per lab instructions." style="width: 624.00px" src="img/be20564b5af179cb.png"></p>
+<ol type="1" start="6">
+<li>Verify the values and click Next.</li>
+<li>Select Pass through (none) for the authorization in order to choose not to apply any security policy for the proxy. Click Next.</li>
+</ol>
+<p class="image-container"><img alt="Image describing Policy selection in API Proxy Wizard.  User has selected &#34;Pass through&#34;." style="width: 624.00px" src="img/f0db6e3e67ead0f2.png"></p>
+<ol type="1" start="8">
+<li>You can select which API resources, from the list configured in the OpenAPI Spec, should be exposed. Select all &amp; Click on Next</li>
+</ol>
+<p class="image-container"><img alt="Image describing ability to select or deselect individual operations impoted from OpenAPI Spec.  User has selected the default, which is all operations." style="width: 624.00px" src="img/d6d652ce54a323ea.png"></p>
+<ol type="1" start="9">
+<li>Go with the secure Virtual Host configuration. Ensure that the default one is unchecked.</li>
+</ol>
+<p class="image-container"><img alt="Image describing how to enable or disable the http and/or https virtual hosts.  User has unchecked &#34;default&#34; so only secure (https) is checked." style="width: 624.00px" src="img/7b00f6b1c75e6201.png"></p>
+<ol type="1" start="10">
+<li>Ensure that only the test environment is selected to deploy to and click Create and Deploy</li>
+</ol>
+<p class="image-container"><img alt="Image describing selection of which environments to deploy API Proxy to via the wizard.  User has sselected &#34;test&#34; and left other environments unchecked." style="width: 624.00px" src="img/77102007f1302522.png"></p>
+<ol type="1" start="11">
+<li>Once the API proxy is created and deployed click Edit Proxy to view your proxy in the proxy editor.</li>
+</ol>
+<p class="image-container"><img alt="Image describing completion of wizard.  There is an &#34;Edit proxy&#34; button that will open the newly created proxy in the proxy editor." style="width: 624.00px" src="img/f61c97d77140c5f5.png"></p>
+<ol type="1" start="12">
+<li><em>Congratulations!</em> ...You have now built a reverse proxy for an existing backend service. You should see the proxy Overview tab.</li>
+</ol>
+<p class="image-container"><img alt="Image describing various features of the API Proxy overview page.  Details about proxy revision, deployment state, virtual hosts, and proxy and target endpoints can be seen here.  Additionally there are links to open the &#34;develop&#34; view or the &#34;trace&#34; tool." style="width: 624.00px" src="img/56d9d7f853ad941a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Test the API Proxy" duration="0">
+        <p>Let us test the newly built API proxy. You can use any HTTP client like cURL or Postman, or the <a href="https://docs.apigee.com/api-platform/debug/using-trace-tool-0" target="_blank">Apigee Trace Tool</a>.</p>
+<h3 is-upgraded><strong>Using cURL</strong></h3>
+<p>org = Organization name env = Environment where API is deployed</p>
+<p><code>curl -X GET "https://&#123;&#123;org}}-&#123;&#123;env}}.apigee.net/&#123;&#123;your initials}}_hipster-products-api/products"</code></p>
+<h3 is-upgraded><strong>Using Trace Tool:</strong></h3>
+<ul>
+<li>Navigate to your proxy&#39;s Trace tab.</li>
+<li>Ensure that the deployed API revision is selected.</li>
+<li>Hit Start Trace Session.</li>
+</ul>
+<p class="image-container"><img alt="Image describing the API Proxy Trace Tool.  User has selected revision 1 to trace and then clicked the button labeled &#34;Start Trace Session&#34;" style="width: 624.00px" src="img/8f9df3186cef7bed.png"></p>
+<ul>
+<li>Wait for Trace session to start.</li>
+<li>Modify the URL to send to a valid API resource - append a &#39;/products&#39; to the end of the URL.</li>
+<li>Hit &#39;Send&#39;.</li>
+</ul>
+<p class="image-container"><img alt="Image describing invoking the trace tool.  User appended &#34;/products&#34; to the URL and clicked  the &#34;send&#34; button." style="width: 624.00px" src="img/901940b495ca5080.png"></p>
+<ul>
+<li>You will see that the API proxy recieved the request and sent back a HTTP status 200 response which was logged by the Trace session. You can click on the step shown below to view the response body.</li>
+</ul>
+<p class="image-container"><img alt="Image depicting a successful trace response.  Left pane shows the HTTP method, status code, invoked URI, and elapsed response time.  User has also clicked a node in the visual transaction map that reveals the JSON response received from the server." style="width: 624.00px" src="img/4d1b0dd75db0b4a2.png"></p>
+<h3 is-upgraded><strong>Save the API Proxy</strong></h3>
+<ol type="1" start="1">
+<li>Let&#39;s save the API Proxy locally as an API Bundle so that we can reuse it in other labs.</li>
+<li>Save the API Proxy by downloading the proxy bundle, See screenshot below for instructions.</li>
+</ol>
+<p class="image-container"><img alt="Image describing the process of downloading an API Proxy locally.  User is on the &#34;Overview&#34; page of the API Proxy and has clicked &#34;Project&#34; then &#34;Download Revision&#34;" style="width: 624.00px" src="img/5b5ec8cf12c74d61.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lab 1 - Summary" duration="0">
+        <p>That completes this hands-on lesson. In this simple lab you learned how to use Apigee to proxy an existing backend using an OpenAPI Specification and the Apigee proxy wizard.</p>
+<h3 is-upgraded><strong>Lab Video</strong></h3>
+<p>If you like to learn by watching, here is a short video on creating a reverse proxy using OpenAPI Specification - <a href="https://www.youtube.com/watch?v=3XBG9QOUPzg" target="_blank">https://www.youtube.com/watch?v=3XBG9QOUPzg</a></p>
+<h3 is-upgraded><strong>Earn Extra-points</strong></h3>
+<p>Now that you have created a reverse proxy using an OpenAPI spec, click on the Develop tab and explore the flow conditions populated from the OpenAPI spec. Further expore the trace tab in the API Proxy editor which supports filtering traces as well as downloading trace data for offline use. Also, explore the OpenAPI Spec editor which allows you to edit an OpenAPI specification and supports bidirectional navigation between the yaml/json and a live view of the rendered OpenAPI spec. See how you can generate an API Proxy using the &#34;Generate proxy&#34; action in the Specs view. <img alt="Picture of &#34;Generate proxy&#34; action in Specs view" style="width: 624.00px" src="img/5b126cf5a0656158.png"></p>
+<h3 is-upgraded><strong>Quiz</strong></h3>
+<ol type="1" start="1">
+<li>How do you import the proxy bundle you just downloaded?</li>
+<li>How does Apigee handle API versioning?</li>
+<li>Are there administrative APIs to create, update, or delete API proxies in Apigee?</li>
+</ol>
+<h3 is-upgraded><strong>References</strong></h3>
+<ul>
+<li>Useful Apigee documentation links on API Proxies -</li>
+<li>Build a simple API Proxy - <a href="http://docs.apigee.com/api-services/content/build-simple-api-proxy" target="_blank">http://docs.apigee.com/api-services/content/build-simple-api-proxy</a></li>
+<li>Best practices for API proxy design and development - <a href="http://docs.apigee.com/api-services/content/best-practices-api-proxy-design-and-development" target="_blank">http://docs.apigee.com/api-services/content/best-practices-api-proxy-design-and-development</a></li>
+<li>Watch this &#34;4 Minute Video 4 Developers&#34; (4MV4D) on &#34;Anatomy of an API Proxy&#34; - <a href="https://youtu.be/O5DJuCXXIRg" target="_blank">https://youtu.be/O5DJuCXXIRg</a></li>
+</ul>
+<h3 is-upgraded><strong>Rate this lab</strong></h3>
+<p>How did you like this lab? Rate <a href="https://goo.gl/forms/G8LAPkDWVNncR9iw2" target="_blank">here</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lab 2 - API Security and API Producer/Consumer Relationship on Apigee Edge" duration="0">
+        <p><em>Duration : 20 mins</em></p>
+<p><em>Persona : API Team</em></p>
+<h3 is-upgraded><strong>Use case</strong></h3>
+<p>You have an API that you want to secure and expose for consumption by different Apps (API consumers). In addition to setting up authorized access to the API, you also want to be able to identify and control which App is making calls to the API so you can customize API behavior based on the the caller, or gather data on consumption patterns by differnt Apps and view that data through Analytics dashboards.</p>
+<h3 is-upgraded><strong>How can Apigee Edge help?</strong></h3>
+<h2 is-upgraded><strong>API Proxy - API Product - App Relationship</strong></h2>
+<p>On Apigee Edge, in order to secure an API Proxy and control access by consumers, we need to first understand the relationship between API Proxies, API Products, and Apps.</p>
+<p>While the API Proxy allows you to expose the API endpoint according to API design specification, it also serves to decouple the API backend (target service) from the front end (client Apps), and in turn API production from consumption. This is accomplished by creating &#39;API Products&#39; which are configurations that define how an API can be consumed. The API Product configuration may contain metadata that defines rules for consumption of the API through the particular API Product. These rules may include allowed consumption quota (Eg. 100 API calls per minute), visibility (Public vs Private vs Internal), API resource restrictions (Eg. Only /products resource URL may be called, but not /products/{product ID}), which API deployment environment the caller is allowed to access (Eg. test, prod), etc. Once the API Products are created, client Apps can then subscribe to them. On subscription, Apigee automatically generates and provisions an API Key/Secret pair for the App. These credentials can then be used to call the API endpoint with authentication and authorization, from within App code.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/63920d1c80c393ae.png"></p>
+<h2 is-upgraded><strong>API Proxy Configuration</strong></h2>
+<p>While Apigee provides multiple ways of securing an API and authorizing API calls - including <a href="https://docs.apigee.com/api-platform/security/api-keys" target="_blank">API Keys</a>, <a href="https://docs.apigee.com/api-platform/security/oauth/oauth-home" target="_blank">OAuth</a>, <a href="https://docs.apigee.com/api-platform/reference/policies/jwt-policies-overview" target="_blank">JWT Tokens</a>, and <a href="https://docs.apigee.com/api-platform/reference/policies/saml-assertion-policy.html" target="_blank">SAML</a> - this lab will focus on using simple API Key verification to secure an API.</p>
+<p>Within the API Proxy, the <a href="http://docs.apigee.com/api-services/reference/verify-api-key-policy" target="_blank">Verify API Key Policy</a> can be used to authenticate and authorize incoming API calls, based on API Key verification. As a result of successful API Key verification, the <a href="https://docs.apigee.com/api-platform/reference/policies/verify-api-key-policy" target="_blank">Verify API Key Policy</a> also populates the API Proxy runtime context with details about the App making the call, the App developer, the API product associated with the call, and so on. This context can then be used to parameterize other policies applied, in order to affect API behavior such as quota enforcement or routing based on the client App. The data can also be extracted and used to gain business insights through Apigee Analytics.</p>
+<p>In this lab, you will..</p>
+<ul>
+<li>Configure a <a href="https://docs.apigee.com/api-platform/reference/policies/verify-api-key-policy" target="_blank">Verify API Key Policy</a> for an existing, unsecured API proxy, and use the Apigee Trace tool to see the policy in action..</li>
+<li>Bundle the API Proxy into an API Product.</li>
+<li>Register a Developer and an App within your Org, that subscribes to the API Product, to test authorized consumption of the API.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Prerequisites" duration="0">
+        <p>For this lab, you will need an API proxy that is not currently secured. If you do not have an API proxy available for this lab, revisit lab 1 <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">&#34;API Design : Create a Reverse Proxy from OpenAPI Spec&#34;</a> and then return here to complete these steps.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Choose and test the API Proxy to secure" duration="0">
+        <ol type="1" start="1">
+<li>Log into the Apigee Edge Management UI at <a href="https://login.apigee.com/" target="_blank">https://login.apigee.com</a>. Navigate to Develop → API Proxies, and select the API Proxy (labeled {your_initials}_Hipster-Products-API) that you created in <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">Lab 1</a>.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/1c3f73197b977cf3.png"></p>
+<ol type="1" start="2">
+<li>Verify that the API proxy is deployed to an environment from the Overview page. Environment(s) to which the selected revision of the API proxy is deployed will be indicated by a green circle. If it is not deployed, click an environment from the &#34;Deployment&#34; pull-down to deploy the API proxy to that environment.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/24484009cb12901.png"></p>
+<ol type="1" start="3">
+<li>Verify that you can successfully make calls using the built-in trace tool.</li>
+</ol>
+<ul>
+<li>Click the Trace tab near the top of the window.</li>
+<li>The Trace view allows you to initiate tracing for up to 10 minutes, during which time all requests (regardless of whether they are sent from the trace tool or any other client) will be captured and their traces made visible to you.</li>
+<li>Click Start Trace Session to begin a trace session.</li>
+<li>If you&#39;re using the API proxy you built in the <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">previous Lab</a>, add the <code>/products</code> resource path to the URL prior to sending a sample API call request. Click Send to send a request.</li>
+<li>You should see a successful 2xx response for your API Call (it may take a few seconds for the trace results to appear)</li>
+</ul>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/20cac194b94bca49.png"></p>
+<ul>
+<li>Click the &#34;Stop Trace Session&#34; button.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add a Verify API Key Policy" duration="0">
+        <ol type="1" start="1">
+<li>To get to the proxy editor, click the &#34;DEVELOP&#34; tab next to the &#34;TRACE&#34; tab, or Navigate to Develop &gt; API Proxies in the side menu, and open your API proxy. Click the Develop tab (in the upper right area of the page) to see the flow editor (you may have to move the panes to see the full request and response flow lines)</li>
+<li>Click +Step on the request flow.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/f1bc80a0a283e858.png"></p>
+<ol type="1" start="3">
+<li>Select <em>Verify API Key</em> policy from the <em>Security</em> section of the list. And provide the following values:</li>
+</ol>
+<ul>
+<li>Display Name: Verify API Key</li>
+<li>Name: Verify-API-Key</li>
+</ul>
+<p>Add</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/cef3790ade36b86.png"></p>
+<ul>
+<li>The policy will be added after any policies you previously had in the Request flow. Since we likely want this to occur first, drag the new policy to be the leftmost of any policies in the flow.</li>
+<li>With the <em>Verify API Key</em> policy selected, you can see its configuration (the default policy configuration is below). Note that the API Key is being retrieved from the context as the variable <em>request.queryparam.apikey</em>. This is the default but the policy can be configured to retrieve the key from any parameter you prefer, for example, <em>request.header.client-id</em>, etc. (note: if you plan to use the Apigee trace tool for the lab, only query parameters are suppoted but if you have an alternative client such as cURL or Postman, feel free to use any parameter you like)</li>
+</ul>
+<p><code><?xml version="1.0" encoding="UTF-8" standalone="yes"?></code></p>
+<p><code><VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key"></code></p>
+<p><code>    <DisplayName>Verify API Key</DisplayName></code></p>
+<p><code>    <Properties/></code></p>
+<p><code>    <APIKey ref="request.queryparam.apikey"/></code></p>
+<p><code></VerifyAPIKey></code></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/da9ba56f8d2d8507.png"></p>
+<ul>
+<li>Save the API proxy.</li>
+</ul>
+<ol type="1" start="4">
+<li>Click the Trace tab near the top of the window and click Start Trace Session to begin a trace session.</li>
+</ol>
+<ul>
+<li>If you&#39;re using the API proxy you built in the <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">previous Lab</a>, add the <code>/products</code> resource path to the URL prior to sending a sample API call request. Click Send to send a request.</li>
+<li>You should see a 401 (unauthorized) response for your API Call because the API proxy was expecting an API Key as a query parameter. See the trace session below</li>
+<li>NOTE: In subsequent steps, you will get an API Key that will allow you to make this API call successfully.</li>
+</ul>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/8c67aefcf2d71c25.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create API Product" duration="0">
+        <ol type="1" start="1">
+<li>Select Publish → API Products from the side navigation menu, and click the +API Product button.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/3f1dc8c58d3f8ce2.png"></p>
+<ol type="1" start="2">
+<li>Populate the following fields</li>
+</ol>
+<p><em>Note</em>: <em>Replace &#123;&#123;your initials}} with your initials, so as to not accidentally modify other developers&#39; work. Eg. API product &#39;Name = xx_Hipster-Products-API-Product&#39;.</em></p>
+<ul>
+<li>Section: Product details</li>
+<li>Name: <code>&#123;&#123;your initials}}_Hipster-Products-API-Product</code></li>
+<li>Display name: <code>&#123;&#123;your initials}}_Hipster Products API Product</code></li>
+<li>Description: <code>Product that provides access to the Hipster Products API.</code></li>
+<li>Environment: <code>test</code></li>
+<li>Access: <code>Public</code></li>
+<li>Section: API resources</li>
+<li>Section: API Proxies</li>
+<li>Click the Add a proxy link</li>
+<li><img alt="image alt text" style="width: 624.00px" src="img/6ae3065574c66112.png"></li>
+<li>In the popup window, select the API Proxy &amp; path radio button. Then select your Hipster Products API Proxy (with deployed revision), select the <code>/</code> option for Path, and click Add.</li>
+<li><img alt="image alt text" style="width: 624.00px" src="img/cbf9f087345f7b75.png"></li>
+</ul>
+<ol type="1" start="3">
+<li>Save the API Product. <img alt="image alt text" style="width: 624.00px" src="img/e5b0902e943260e.png"></li>
+</ol>
+<p>Note: We are adding the entire API Proxy to the API Product. We can just as easily select one or more operations from one or more API proxies and bundle them together in an API Product.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Manually register App in Management UI &amp; generate API Key" duration="0">
+        <ol type="1" start="1">
+<li>Select Publish → Developers from the side navigation menu, and click the +Developer button.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/5c69b9ba60a923a3.png"></p>
+<ol type="1" start="2">
+<li>Populate the following details:</li>
+</ol>
+<ul>
+<li>First Name: <code>&#123;&#123;your initials}}_Test</code></li>
+<li>Last Name: <code>Developer</code></li>
+<li>Username: <code>&#123;&#123;your initials}}_testdev</code></li>
+<li>Email: <code>&#123;&#123;your initials}}_testdev@test.com</code></li>
+</ul>
+<ol type="1" start="3">
+<li>Click Create</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/4908a72f9bdcce2a.png"></p>
+<ol type="1" start="4">
+<li>Select Publish → Apps from the side navigation menu, and click the +App button.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/8cbe27fdc6dbbd61.png"></p>
+<ol type="1" start="5">
+<li>Populate the following details:</li>
+</ol>
+<ul>
+<li>Name: <code>&#123;&#123;your initials}}_Hipster-Products-App</code></li>
+<li>Disaplay Name: <code>&#123;&#123;your initials}}_Hipster Products App</code></li>
+<li>Select the <code>Developer</code> radial option.</li>
+<li>Select the developer you previously created.</li>
+<li>Click the Add Product button.</li>
+</ul>
+<ol type="1" start="6">
+<li><img alt="image alt text" style="width: 624.00px" src="img/e69d6fa13dd3e4cf.png"></li>
+</ol>
+<ul>
+<li>Select the API Product you previously created, and click Add.</li>
+</ul>
+<ol type="1" start="7">
+<li><img alt="image alt text" style="width: 624.00px" src="img/4abbce141810ec8d.png"></li>
+<li>Click the Create button to save.<br><img alt="image alt text" style="width: 624.00px" src="img/7d7dda88bd9786d.png"></li>
+<li>Once created, you will then see that Apigee has generated an API Key and Secret pair for the App. Click on the &#39;Show&#39; link next to the Key, and copy this API Key.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/28ee5946f3e0100f.png"></p>
+<p>You can now use this API Key to make a valid API request to your API Proxy.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Test your API with valid API Key" duration="0">
+        <ol type="1" start="1">
+<li>Navigate to Develop &gt; API Proxies in the side menu, and open your API proxy. Click the Trace tab near the top of the window and click Start Trace Session to begin a trace session.</li>
+<li>Add the <code>/products</code> resource path to the URL prior to sending a sample API call request. In addition, add a query parameter called <code>apikey</code> with the value of the API Key you copied. Click Send to send a request.</li>
+<li>You should now see that the API request returns a 200 OK response, as the Verify API Key policy has found the API key to be valid.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/11f2bd5cd08022a6.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lab 2 - Summary" duration="0">
+        <p>In this lab you learned how the relationship between API Proxies, API Products and Apps, helps obfuscate API production from API consumption; and how to protect your API proxy using the Verify API Key policy. You then implemented the policy and tested it using the built-in Trace Tool.</p>
+<h3 is-upgraded><strong>Lab Video</strong></h3>
+<p>If you would rather watch a video that covers this topic, point your browser <a href="https://youtu.be/3nUFCOgGlS8" target="_blank">here</a>.</p>
+<h3 is-upgraded><strong>Quiz</strong></h3>
+<ol type="1" start="1">
+<li>Why is the Verify API Key policy typically found as the first policy in the Request PreFlow? When might it be in a conditional PreFlow instead of the &#34;All&#34; PreFlow?</li>
+<li>How would you configure the policy to get the API Key from a header called &#34;Api-Key&#34; instead of the default query parameter location?</li>
+</ol>
+<h3 is-upgraded><strong>References</strong></h3>
+<ul>
+<li>Link to Apigee docs page</li>
+<li>Verify Api Key Policy <a href="https://docs.apigee.com/api-platform/reference/policies/verify-api-key-policy" target="_blank">https://docs.apigee.com/api-platform/reference/policies/verify-api-key-policy</a></li>
+</ul>
+<h3 is-upgraded><strong>Rate this lab</strong></h3>
+<p>How did you like this lab? Rate <a href="https://goo.gl/forms/XxDqVtWHnyFdEChv1" target="_blank">here</a>.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
