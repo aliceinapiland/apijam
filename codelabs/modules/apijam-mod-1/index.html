@@ -663,6 +663,576 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Lab 4 - Build an App Developer Experience using Apigee Integrated Developer Portals" duration="0">
+        <p><em>Duration : 30 mins</em></p>
+<p><em>Persona : API Team</em></p>
+<h2 is-upgraded><strong>Use case</strong></h2>
+<p>You want to provide and manage an easy, self-service on-boarding experince for app developers who wish to consume your API Products via a Developer Portal. You want to enable app developers to learn about, register for, and begin using your APIs, as well as control visibility and access to different API Products.</p>
+<h2 is-upgraded><strong>How can Apigee Edge help?</strong></h2>
+<p>Apigee Edge provides multiple options for your Developer Portal. Apigee supports several developer portal solutions, ranging from simple turn-key to fully customizable and extensible. The turn-key <a href="https://docs.apigee.com/api-platform/publish/portal/build-integrated-portal" target="_blank">Integrated Developer Portal</a> option supports branding and customization of much of the site, such as theme, logos, and page content, and can be published in seconds, directly from the management UI. We also provide a <a href="https://docs.apigee.com/api-platform/publish/drupal/open-source-drupal-8" target="_blank">Drupal-based portal</a> if you want full control and to leverage any of the hundreds of Drupal modules available in the Drupal Market. This lab focuses on the Integrated Developer Portal.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/f1e40356b7a281ae.png"></p>
+<p>In this lab, you will create an Integrated Developer Portal wherein you will publish API Products, and through which app developers can</p>
+<ul>
+<li>learn API usage through OpenAPI specification based interactive documentation</li>
+<li>register Apps that consume API Products, and thereby</li>
+<li>generate App client credentials (API Key and Secret) that can be used to consume APIs.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pre-requisites" duration="0">
+        <p>For this lab, you should have completed <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank">Lab 1</a>, <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%202" target="_blank">Lab 2</a> and <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%203" target="_blank">Lab 3</a> of this module.</p>
+<p>You will need...</p>
+<ul>
+<li>An OpenAPI specification uploaded to your Spec store within your Organization. This specification will make up the documentation of your API. If you do not have an OpenAPI Specification available for this lab, revisit <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%201" target="_blank"><em>Lab 1 - Design &amp; Create an API Proxy with OpenAPI Specification</em></a></li>
+<li>API Products that bundle your API Proxies. If you do not have an API Product configured, revisit <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%202" target="_blank"><em>Lab 2 - API Security and API Producer/Consumer Relationship on Apigee Edge</em></a>, and <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%203" target="_blank">Lab 3 - Manage tiered API Product subscription through API call quotas</a>.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Update API Proxy for CORS Support" duration="0">
+        <p>CORS (Cross-origin resource sharing) is a standard mechanism that allows JavaScript XMLHttpRequest (XHR) calls executed in a web page to interact with resources from non-origin domains. CORS is a commonly implemented solution to the &#34;<a href="https://en.wikipedia.org/wiki/Same-origin_policy" target="_blank">same-origin policy</a>&#34; that is enforced by all browsers. For example, if you make an XHR call to your API Proxy from JavaScript code executing in your browser, the call will fail. This is because the domain serving the page to your browser is not the same as the domain serving your API, eg. &#34;{your org name}-{environment name}.apigee.net&#34;. CORS provides a solution to this problem by allowing servers to &#34;opt-in&#34; if they wish to provide cross-origin resource sharing.</p>
+<p>In this step, we upload and deploy a version of your API proxy which includes configurations that support CORS, before it is published to a Developer Portal where it could be invoked within interactive docs pages. Typically, you would set these configurations up as described under &#34;<a href="https://docs.apigee.com/api-platform/develop/adding-cors-support-api-proxy" target="_blank">Adding CORS support to an API proxy</a>&#34;. However, in the interest of time, in this lab, we will make use of a pre-configured proxy revision instead.</p>
+<ol type="1" start="1">
+<li>Download <a href="https://github.com/apigee/apijam/raw/master/Module-1/Resources/Hipster-Products-API_With_CORS_Config.zip" target="_blank">this revision</a> of the API proxy. This is a version of the same Hipster Products API that we have been working on so far, but with CORS configurations.</li>
+<li>Navigate to API Proxies and select your Hipster Product API proxy. Then click the Project button and select Upload a New Revision.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/44fb543255367481.png"></p>
+<p>In the pop-up dialog, choose the previously downloaded revision of the API proxy, and click Upload.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/914a64ec66d05d4c.png"></p>
+<ol type="1" start="3">
+<li>Once uploaded, in the latest revision of your API proxy, navigate to the Proxy Endpoints &gt;&gt; default XML, scroll down and change the <code><BasePath></code> node value to match your proxy&#39;s basepath.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/ff22de77f22a85d9.png"></p>
+<p>Hit Save.</p>
+<ol type="1" start="4">
+<li>Once saved, select the Deployment drop down and click on test, to undeploy the older revision and deploy the latest revision of the proxy to the test environment.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/3de7d831a493d63.png"></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/a5e13a97655cb8d1.png"></p>
+<p>Your API proxy should now include configurations to support CORS processing.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Update the Open API Spec" duration="0">
+        <p>In order to ensure that we have an updated OpenAPI Spec that accurately describes the API endpoint exposed through our API Proxy, we must first modify the spec - specifically the <code>host</code>, <code>basepath</code>, <code>securityDefinitions</code> and <code>security</code> properties. To do this, navigate to Develop → Specs on the main menu, select the spec that we previously imported in Lab 1, and modify the the <code>host</code>, <code>basepath</code>, <code>securityDefinitions</code> and <code>security</code> properties as shown below:</p>
+<p><code>host: &#123;&#123;your API proxy host}}</code></p>
+<p><code>basePath: /v1/&#123;&#123;your initials}}_hipster-products-api</code></p>
+<p><code>securityDefinitions:</code></p>
+<p><code>  APIKeyQuery:</code></p>
+<p><code>    type: "apiKey"</code></p>
+<p><code>    in: "query"</code></p>
+<p><code>    name: "apikey"</code></p>
+<p><code>security:</code></p>
+<p><code>  - APIKeyQuery: []</code></p>
+<p><code>schemes:</code></p>
+<p><code>  - https</code></p>
+<p>Where &#123;&#123;your API proxy host}} = &#123;&#123;your org}}-&#123;&#123;environment}}.apigee.net, in Apigee Trial orgs</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/e05acd0bc4134505.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create a Developer Portal" duration="0">
+        <ol type="1" start="1">
+<li>Navigate to Publish → Portals and click +Portal, or Get started (if you haven&#39;t created any portals yet within the org).</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/ce3721838ff06883.png"></p>
+<ol type="1" start="2">
+<li>Enter details in the portal creation wizard. Replace &#123;&#123;your-initials}} with the initials of your name.</li>
+</ol>
+<ul>
+<li>Name: <code>&#123;&#123;your initials}}_Hipster API Portal</code></li>
+<li>Description: <code>Developer portal for consumption of Hipster APIs.</code></li>
+</ul>
+<ol type="1" start="3">
+<li>Click Create</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/725ea984d02a9da1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Publish the Bronze (Free) API Product to the Portal" duration="0">
+        <ol type="1" start="1">
+<li>Click the Portal Editor&#39;s dropdown and select API catalog.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/b2cc8fd18076d663.png"></p>
+<ol type="1" start="2">
+<li>Click + to select the Bronze API Product to publish to the Portal. Select the API Product to publish and click Next.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/7a14f1438e24dc17.png"></p>
+<ol type="1" start="3">
+<li>Make sure that the Published checkbox is checked, so that the Bronze API Product is visible to authorized App developers through the API catalog, during App creation.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/dd2872029f164225.png"></p>
+<ol type="1" start="4">
+<li>Click the Source API spec dropdown and select Choose a different spec....</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 605.00px" src="img/b5e5f15cc7ef09eb.png"></p>
+<ol type="1" start="5">
+<li>Select the recently updated OpenAPI Specification to use as a source. The current version (snapshot) of the selected OpenAPI Specification will be used to generate the documentation for this API product in the portal.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/2dfaf63d0ef21442.png"></p>
+<ol type="1" start="6">
+<li>Select the Registered users option so registered developers on the Developer Portal can view this API through the portal. Click Next.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/a10f96908c6b2a9e.png"></p>
+<ol type="1" start="7">
+<li>Select the Image button to update the icon image associated with this API product.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/8ede79c9af72821e.png"></p>
+<ol type="1" start="8">
+<li>Then select Image URL and provide the following URL to import image.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/43971a6cb56e4b37.png"></p>
+<p>Image URL: <code>https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Labs/Lab%204/media/HipsterAPIProductImage.png</code></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/a30cd5d1c0b237f5.png"></p>
+<ol type="1" start="9">
+<li>Click Save.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/78694a63023d748.png"></p>
+<p>The API product is now published to the developer portal.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="App Developer sign-up" duration="0">
+        <ol type="1" start="1">
+<li>Click the Live Portal link to launch a browser tab/window with the new Developer Portal.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/7a4200f11d1b3afb.png"></p>
+<ol type="1" start="2">
+<li>On the developer portal, click the main menu option labeled Sign In. This will take you to the App Developer login page. Here, click Create Account.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/d6e0422dd826a6e.png"></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/77779264ad9bfd39.png"></p>
+<p>Provide the following details, and then click Create Account.<br><code>First Name: &#123;&#123;your first name}}</code></p>
+<p><code>Last Name: &#123;&#123;your last name}}</code></p>
+<p><code>Email: &#123;&#123;your email address}}</code></p>
+<p><code>Password: &#123;&#123;enter a password}}</code></p>
+<p><code>Check the "I agree to terms." box</code></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/9527ac3ee85d8c39.png"></p>
+<ol type="1" start="4">
+<li>On account creation, the App Developer will receive an email notification with an account verification link.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/c4feab6d8252ddc0.png"></p>
+<p>Since we you have provided your own email address as the App Developer in this lab, you should have received this notification. Click the link or copy and paste it into the browser to verify the account.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/3ae428bb64cda8ad.png"></p>
+<ol type="1" start="5">
+<li>Once account is verified, the App Developer can sign into the portal using their credentials.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 620.00px" src="img/121d6b4a09150d26.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="View API Documentation" duration="0">
+        <ol type="1" start="1">
+<li>Log in as App Developer using the account credentials created in the previous steps. Click on the APIs menu link on the Developer Portal. This will take you to the API catalog page. Here&#39; you will see that API product we previously published to be visible to all registered developers.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/d5f10c7d77857166.png"></p>
+<ol type="1" start="2">
+<li>Click the API Product icon for the Bronze product in the catalog, to view it&#39;s documentation. This will take you to an interactive documentation page generated from the OpenAPI spec that we associated to the API product at the time of publishing.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/17372480f2c388f8.png"></p>
+<ol type="1" start="3">
+<li>Select one of the API resource paths from the left pannel of the docs and click Execute. You will then see a 401 Unauthorized response in the right pannel.<br><img alt="image alt text" style="width: 624.00px" src="img/1ad727a5527219c4.png"><br>This is because you haven&#39;t yet registered any Apps and therefore have no API Keys to use for an authorized API call.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Register Apps" duration="0">
+        <ol type="1" start="1">
+<li>Navigate to the developer account drop down menu on the top right corner, and select the Apps link.<br><img alt="image alt text" style="width: 624.00px" src="img/591288265a24835b.png"></li>
+<li>Click the New App button (either on the page itself or on the top panel, as shown below).<br><img alt="image alt text" style="width: 624.00px" src="img/fa10736e5c0342f.png"></li>
+<li>Enter the following App details and click Create: App Name: <code>&#123;&#123;your initials}}_Hipster-Test-App</code> Description: <code>Test app to try out Hipster Products API using the Bronze (Free) API Product</code><br>Select the Bronze (Free) API Product that is available for subscription.<br><img alt="image alt text" style="width: 624.00px" src="img/ea499ae61d9f6ec1.png"></li>
+<li>You will find that an API Key/Secret pair has been generated for your newly created App. You can now use this API Key to test the API.<br><img alt="image alt text" style="width: 624.00px" src="img/8b8718d520bd6678.png"></li>
+<li>Navigate to the API Catalog, select the Bronze API Product docs, and test out the GET <code>/products</code> resource again. This time though, first click on the Authorize button and select the newly created App&#39;s credentials to set authorization information (API Key) for the API call.<br><img alt="image alt text" style="width: 624.00px" src="img/abc210234a51c4a.png"><br>Click OK after authorization information is set.<br><img alt="image alt text" style="width: 624.00px" src="img/f6981838aba9a0bb.png"><br>Now, click Execute. You will see that a valid 200 OK API response is received.<br><img alt="image alt text" style="width: 624.00px" src="img/d64f93d0368db747.png"></li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Optional: Try out Developer Program, Teams and Audience Management features" duration="0">
+        <p>On Apigee Edge, a <a href="https://docs.apigee.com/api-platform/publish/portal/intro-developer-program" target="_blank">Developer Program</a> is the configuration set associated to each Developer Portal - specifically, App Developer accounts, App Developer identity management configuration, App Developer Teams, and Audience configuration for access to content published on the portal.</p>
+<p>App Developers have the option of creating <a href="https://docs.apigee.com/api-platform/publish/portal/developer-teams" target="_blank">Teams</a> to share responsibility for an app with other developers. Each developer within a Team is assigned a role (<code>Owner</code>, <code>App Admin</code> or <code>Viewer</code> ) that defines their access level to the shared apps.</p>
+<p><a href="https://docs.apigee.com/api-platform/publish/portal/portal-audience" target="_blank">Audience</a> configurations are used to segment portal users or developer teams to control access to the following resources:</p>
+<ul>
+<li>Pages in your portal</li>
+<li>Published API products</li>
+</ul>
+<p>The following figure shows how audiences are used to control access to a set of resources.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/92d2613fabccaf4.png"></p>
+<h2 is-upgraded><strong>Enable Teams and Audience Management features</strong></h2>
+<ol type="1" start="1">
+<li>To utilize Teams and Audience Management features, you must first enroll into the Beta program within your Apigee Edge org. To do this, navigate to the Publish -&gt; Developer Programs menu on the Management UI, and select the developer program associated with your Integrated Developer Portal.<br><img alt="image alt text" style="width: 624.00px" src="img/b99565e61c6980c6.png"></li>
+<li>Click the Enroll button to &#34;Enroll in beta for team and audience management&#34;.<br><img alt="image alt text" style="width: 624.00px" src="img/54b702337994d2f8.png"><br>Once enrolled, you will see the Teams and Audience Management features enabled within your Developer Program.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/6bc23975729ad05d.png"></p>
+<h2 is-upgraded><strong>Create Developer Team</strong></h2>
+<ol type="1" start="1">
+<li>Ensure that you are logged into the Developer Portal with your App Developer credentials. Navigate to the Teams menu from your account drop-down.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/db1b70f019d6758f.png"></p>
+<ol type="1" start="2">
+<li>Click the + New Team button.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/dc1446d1cccfd7d1.png"></p>
+<ol type="1" start="3">
+<li>Fill in team details and click Create.<br>Overview section:</li>
+</ol>
+<ul>
+<li>Team name: <code>&#123;&#123;your initials}}_Hipster App Team</code></li>
+<li>Description: <code>Team that will work together on Hipster apps, and share API Keys.</code></li>
+<li>Point of contact: <code>{your App Developer email address}</code></li>
+</ul>
+<p>Memebers:<br> <code>Your App Developer email ID has already been added to the team with 'Owner' role.</code></p>
+<p><code> If required, you can add additional Developers with different roles.</code></p>
+<ol type="1" start="4">
+<li><br><img alt="image alt text" style="width: 624.00px" src="img/6bc672039e5dc49a.png"></li>
+<li>Once created, you will be able to access this team as a team member from the Developer Portal, and as an API producer, you can view teams created on the Developer Program within the Apigee Management UI as well.<br><img alt="image alt text" style="width: 624.00px" src="img/de9f213e183490c8.png"><br><img alt="image alt text" style="width: 624.00px" src="img/78ea019d93386cfe.png"></li>
+</ol>
+<h2 is-upgraded><strong>Create Audience</strong></h2>
+<p>We will now see how to publish API products on the Developer Portal, with only certain audiences that have entitlement to view and subscribe to those products.</p>
+<ol type="1" start="1">
+<li>Navigate to Publish → Developer Programs → {the developer program associated to your Developer Portal}. Click the Audiences tab and click the &#39;+&#39; button to add a new audience.<br><img alt="image alt text" style="width: 624.00px" src="img/8e8fc62277c76cf9.png"><br>Enter the following details and click OK.<br>Name: <code>Hipster-API-Privileged-Audience</code> Description: <code>A privileged audience that is allowed access to the Hispter API Silver and Gold products.<br></code><img alt="image alt text" style="width: 624.00px" src="img/8cb01020b291cf93.png"></li>
+<li>Once the Audience is created, you define who should be assigned to it. To do this, click the + button in the Assignments section of the Audience.<br><img alt="image alt text" style="width: 624.00px" src="img/d8d0386f495400d8.png"><br>In the popup, type in the name of the team that you previously created. Select the team and click Add(1).<br><img alt="image alt text" style="width: 624.00px" src="img/a0c50d6b0a4bacd2.png"><br>Click Save to save the audience assignment.<br><img alt="image alt text" style="width: 624.00px" src="img/a18d4768744b54da.png"></li>
+</ol>
+<h2 is-upgraded><strong>Publish Silver API Products with New Audience Entitlements</strong></h2>
+<ol type="1" start="1">
+<li>Navigate to Publish → Portals → &#123;&#123;your developer portal}} → API catalog and click the + button.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/d6b5b6f0bcfa0689.png"></p>
+<ol type="1" start="2">
+<li>Select the Silver API Product and click Next.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/7aed272877d137fa.png"></p>
+<ol type="1" start="3">
+<li>Make sure that the Published checkbox is checked, so that the Silver API Product is visible to authorized App developers through the API catalog, during App creation.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/6ac3c3e9e0031028.png"></p>
+<ol type="1" start="4">
+<li>Click the Source API spec dropdown and select Choose a different spec....</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 605.00px" src="img/b5e5f15cc7ef09eb.png"></p>
+<ol type="1" start="5">
+<li>Select the recently updated OpenAPI Specification to use as a source. The current version (snapshot) of the selected OpenAPI Specification will be used to generate the documentation for this API product in the portal.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/2dfaf63d0ef21442.png"></p>
+<ol type="1" start="6">
+<li>Select the Selected audiences option in under API visibility, and check the box for the Audience you just created.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/a8c4da37987cf46c.png"></p>
+<ol type="1" start="7">
+<li>Select the Image button to update the icon image associated with this API product.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/8ede79c9af72821e.png"></p>
+<ol type="1" start="8">
+<li>Then select Image URL and provide the following URL to import image.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/43971a6cb56e4b37.png"></p>
+<p>Image URL: <code>https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Labs/Lab%204/media/HipsterAPIProductImage.png</code></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/a30cd5d1c0b237f5.png"></p>
+<ol type="1" start="9">
+<li>Click Save.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/c35b4c9410d19623.png"></p>
+<ol type="1" start="10">
+<li>Validate the API visibility setting for the Silver API Product.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/aa0fa98a0676cc4a.png"></p>
+<h2 is-upgraded><strong>Create Team App</strong></h2>
+<ol type="1" start="1">
+<li>On the developer portal, navigate to the developer account drop down menu on the top right corner, and select the Apps link. Then click the New App button.<br><img alt="image alt text" style="width: 624.00px" src="img/d8c63709d51ebb03.png"></li>
+<li>Enter the following App details and click Create: App Name: <code>&#123;&#123;your initials}}_Hipster-App</code> Description: <code>App that is registered against the team to share App credentials and access Silver tier Hipster API product.</code> Owner: <code>&#123;&#123;your initials}}_Hipster App Team</code><br>Select the Silver (Basic) API Product that is available for subscription.<br><img alt="image alt text" style="width: 624.00px" src="img/b5bba1237fe2c0b1.png"></li>
+<li>You will find that an API Key/Secret pair has been generated for your newly created App. You can now use this API Key to test the API.<br><img alt="image alt text" style="width: 624.00px" src="img/b74c26988c120b8.png"></li>
+<li>Navigate to the API Catalog, select the Silver API Product docs.<br><img alt="image alt text" style="width: 624.00px" src="img/3996d4c3df45426.png"></li>
+<li>Select the GET <code>/products</code> resource. Click on the Authorize button and select the newly created Team App&#39;s credentials to set authorization information (API Key) for the API call. Then click Authorize within the popup.<br><img alt="image alt text" style="width: 624.00px" src="img/66f669de7bae7c45.png"><br>Click OK after authorization information is set.<br><img alt="image alt text" style="width: 624.00px" src="img/9a18b7f675152af0.png"><br>Now, click Execute. You will see that a valid 200 OK API response is received.<br><img alt="image alt text" style="width: 624.00px" src="img/35373c9cdd1b99eb.png"></li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lab 4 - Summary" duration="0">
+        <p>You&#39;ve learned how to do the following:</p>
+<ul>
+<li>Deploy the Apigee Lightweight Developer Portal</li>
+<li>Publish an API Product with an OpenAPI Specification</li>
+<li>Use the Developer Portal UI to browse the OpenApi Specification Snapshot as a developer.</li>
+</ul>
+<h2 is-upgraded><strong>Lab Video</strong></h2>
+<p>If you would rather watch a video that covers this topic, point your browser <a href="https://youtu.be/_gDpzDJPNQg" target="_blank">here</a>.</p>
+<h2 is-upgraded><strong>Earn Extra-points</strong></h2>
+<ul>
+<li>Add a second product to the portal and test it by launching the Live Portal.</li>
+<li>Update your API specification, and then <a href="https://docs-new.apigee.com/publish-apis#take-snapshot" target="_blank">take a snapshot</a> of the specification to update the portal documentation.</li>
+</ul>
+<h2 is-upgraded><strong>Quiz</strong></h2>
+<ol type="1" start="1">
+<li>What are two reasons why you might publish multiple API products to the Developer Portal?</li>
+<li>Changes made to OpenAPI Specification are made available in the Developer Portal automatically. True or False?</li>
+</ol>
+<h2 is-upgraded><strong>Rate this lab</strong></h2>
+<p>How did you link this lab? Rate <a href="https://goo.gl/forms/j33WG2U0NFf02QHi1" target="_blank">here</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lab 5 - Measure API Program Success with Apigee Analytics" duration="0">
+        <p>Last Updated: 2019-09-03</p>
+<p><em>Duration : 15 mins</em></p>
+<p><em>Persona : API Product Team</em></p>
+<h2 is-upgraded><strong>Use Case</strong></h2>
+<h3 is-upgraded><strong>What comes after publishing the first API Product</strong></h3>
+<p>After you have some API Products up and running you want to have a look at how the program performs and how successful your API program is.</p>
+<ul>
+<li>How is traffic trending over time?</li>
+<li>When is the traffic flowing fastest?</li>
+<li>Where are the most users?</li>
+<li>What are the most active developers?</li>
+</ul>
+<h3 is-upgraded><strong>Insights help with capacity planning</strong></h3>
+<p>With trend usage data you can see how your API calls are trending over time and predict how the traffic will be in the next year, when you need to do your capacity planning</p>
+<p>Through visualization of the data with out of the box analytics, Apigee helps you with finding the trends and patterns of your APIs</p>
+<h3 is-upgraded><strong>Tying traffic to API Products</strong></h3>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/5f0b371ae545452a.png"></p>
+<p>When registering an application to an API product that metadata is loaded when verifying an API key or Oauth Token so you can identify the Developer, App and the Product. This data is crucial for insights into your program.</p>
+<h2 is-upgraded><strong>Pre-requisites</strong></h2>
+<ul>
+<li>If you have followed previous modules you can probably already see some traffic for the proxies you have created earlier and work with your previous API proxy for the custom statistics.</li>
+<li>If you haven&#39;t followed previous models you can follow this lab too but will see less data in your dashboards.</li>
+<li>(Optional) If you want the full experience setup a load generator before to see some data in your dashboards.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="(optional) Add some load to API proxies" duration="0">
+        <p>If you have not followed previous modules you can use a load generator to have some data in your reports.</p>
+<p>You have to have an API proxy with a default API key policy and 3 API keys ideally for different Apps and API products.</p>
+<h2 is-upgraded><strong>Configure and Run Load Generator</strong></h2>
+<p>You can create a new proxy by uploading the proxy in the <em>loadgen</em> folder in this repository.</p>
+<ol type="1" start="1">
+<li>Create a new proxy by clicking Develop &gt; API Proxies &gt; + Proxy</li>
+<li>In the new proxy wizard select to upload a proxy bundle and upload your .zip file from the repository. You can download this .zip file <a href="https://github.com/aliceinapiland/apijam/blob/master/Module-1/Labs/Lab%205/loadgen/LoadGen-Proxy.zip?raw=true" target="_blank">here</a></li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/739a889d8370cf05.png"></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/fef37d6e219a3bdb.png"></p>
+<ol type="1" start="3">
+<li>Click Build.</li>
+<li>After the proxy was created you can directly open it in the editor and go to the Develop tab to change the values for your proxies and api keys. Navigate to the config/model.json resource in the Resources section on the left panel, and change the values as shown below:</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/8c0352d0b32470c2.png"></p>
+<ol type="1" start="5">
+<li>After changing the values Save and deploy the proxy and run the proxy from the Trace tab.</li>
+<li>Let the load generator run for a while and undeploy it to make it stop producing traffic.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Understand API usage using the pre-built Apigee analytics dashboards" duration="0">
+        <p>Apigee comes with a lot of pre built reports. For the purpose of these labs and in the interest of time, we will walk through the different dashboards with screenshots from populated demo environments. Feel free to use the optional load generator to follow along in your own environment.</p>
+<p>If you prefer you can have a look at the API Dashboards by watching this video that gives you an overview of the metrics dashboards with a lot of filled values: <a href="https://youtu.be/mElNO44QQFQ?t=126" target="_blank">https://youtu.be/mElNO44QQFQ?t=126</a></p>
+<p>To get to the reports open the Analyze menu in the sidebar.</p>
+<p class="image-container"><img alt="image alt text" style="width: 616.00px" src="img/47cff798119fe9b.png"></p>
+<h2 is-upgraded><strong>API Proxy Performance</strong></h2>
+<p>The Proxy Performance dashboard helps you see API proxy traffic patterns and processing times. You can easily visualize how much traffic your APIs generate and how long it takes for API calls to be processed, from the time they are received by Apigee Edge until they are returned to the client app.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/94c58046cbd25aa2.png"></p>
+<h2 is-upgraded><strong>Cache Performance</strong></h2>
+<p>The Cache Performance dashboard lets you see at a glance the value of your Apigee Edge cache. The dashboard helps you visualize the benefit of the cache in terms of lower latency and reduced load backend servers.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/ef9d7ba9c95e49d8.png"></p>
+<h2 is-upgraded><strong>Error Code Analysis</strong></h2>
+<p>The Error Code Analysis dashboard tells you about error rates for API proxies and targets. The Error Code Analysis dashboard uses:</p>
+<ul>
+<li>The response code to calculate proxy errors</li>
+<li>The target response code to calculate target errors</li>
+</ul>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/e5fb20003eaa06e7.png"></p>
+<h2 is-upgraded><strong>Target Performance</strong></h2>
+<p>The Target Performance dashboard helps you visualize traffic patterns and performance metrics for API proxy backend targets.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/5debf50928d7e3ee.png"></p>
+<h2 is-upgraded><strong>Developer Engagement</strong></h2>
+<p>The Developer Engagement dashboard tells you which of your registered app developers are generating the most API traffic. For each of your developers, you can find out who is generating the most API traffic and the most errors. For example, if a particular developer&#39;s app is generating a lot of errors relative to other developers, you can pro-actively address the problem with that developer.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/5bf0fbe3fb94a132.png"></p>
+<p>In the main view, if it is enabled, select the Analyze button under the Actions column for the app to view details about that app and the app developer. The following chart appears:</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/42aacb6311556822.png"></p>
+<h2 is-upgraded><strong>Traffic Composition</strong></h2>
+<p>The Traffic Composition dashboard measures the relative contribution of your top APIs, apps, developers, and products to your overall API program.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/6ae1f2686adb4d49.png"></p>
+<h2 is-upgraded><strong>Devices</strong></h2>
+<p>The Devices dashboard tells you about the devices and servers that are being used to access your APIs. It lets you spot trends in how users are accessing your APIs. For instance, you might notice that traffic from one type of device is increasing, while another is going down, and then decide if the change requires any action or not.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/c348b841d68acdd5.png"></p>
+<h2 is-upgraded><strong>Geomap</strong></h2>
+<p>The Geo Map dashboard tracks traffic patterns, error patterns, and quality of service across geographical locations. You can view information about all your APIs, or zoom in on specific ones.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/f134a09f529d125d.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add Statistics Collector Policy for custom analytics collection" duration="0">
+        <ol type="1" start="1">
+<li>Click on Develop → API Proxies from side navigation menu. Open the existing Hipster Products API Proxy that you created in previous labs, and go to the Develop tab.</li>
+<li>To get the data from the path we need to extract it into an Apigee Flow variable first. We do this by adding an Extract Variables policy.</li>
+<li>In the GetProductDetails Flow add a new step to the request by clicking the &#34;+ Step&#34; button</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/7bfb6f0e564c6c33.png"></p>
+<ol type="1" start="4">
+<li>Add an Extract Variables Policy under the &#34;Mediation&#34; category.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/5a09d5845ad63bed.png"></p>
+<ol type="1" start="5">
+<li>Add an Extract Variables Policy under the &#34;Mediation&#34; category.</li>
+</ol>
+<p><code><ExtractVariables name="ExtractVariables-1"></code></p>
+<p><code>   <DisplayName>EV-ExtractProductID </DisplayName></code></p>
+<p><code>   <Source>request</Source></code></p>
+<p><code>   <URIPath></code></p>
+<p><code>      <Pattern ignoreCase="true">/products/{productId}</Pattern></code></p>
+<p><code>   </URIPath></code></p>
+<p><code>   <VariablePrefix>urirequest</VariablePrefix></code></p>
+<p><code>   <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables></code></p>
+<p><code></ExtractVariables></code></p>
+<ol type="1" start="6">
+<li>In the GetProductDetails add a new step to the request by clicking the &#34;+ Step&#34; button</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/82aa8d0686c1bf46.png"></p>
+<ol type="1" start="7">
+<li>Add a Statistics Collector Policy under the &#34;Extensions&#34; Category.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/1d42d7c4b598f963.png"></p>
+<ol type="1" start="8">
+<li>Edit the new Statistics Collector policy and provide it with the following values.</li>
+</ol>
+<p><code><?xml version="1.0" encoding="UTF-8" standalone="yes"?></code></p>
+<p><code><StatisticsCollector async="false" continueOnError="false" enabled="true" name="Statistics-Collector-1"></code></p>
+<p><code>    <DisplayName>SC-CollectStatistics</DisplayName></code></p>
+<p><code>    <Properties/></code></p>
+<p><code>    <Statistics></code></p>
+<p><code>        <Statistic name="productID" ref="urirequest.productId" type="STRING"/></code></p>
+<p><code>    </Statistics></code></p>
+<p><code></StatisticsCollector></code></p>
+<ol type="1" start="9">
+<li>Run a trace session. Click on the Trace tab and click Start Trace Session to start a trace session. Enter the api key from one of your Apps as a query parameter before clicking Send. Click on the Extract Variables Policy Icon to see the value in a variable. This value is picked up by our Statistics Collector policy.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/b47971c7fd436714.png"></p>
+<p>Play around with different api keys from different API</p>
+<p>Note: It takes about 30 minutes for a new custom dimension to be added to the database after the Statistics Collector policy is invoked for the first time, for each environment.</p>
+<p>For example, if a Statistics Collector proxy is invoked in the test environment, data for that custom dimension starts to be available in the test environment 30 minutes later, and the custom dimension will appear in the custom reports Dimensions drop-down list.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create custom report" duration="0">
+        <p>Now we want to have a look at the data we collected in our API proxy. To do that we need to create a custom report that looks for the value we have defined in the statistics collector policy before.</p>
+<ol type="1" start="1">
+<li>Under Analyze &gt; Custom Reports &gt; Reports open the Custom Reports Menu</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/d26dfd436d3ab14.png"></p>
+<ol type="1" start="2">
+<li>Click + Custom Report to create a new custom report</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/dac14be5e4fb22a8.png"></p>
+<ol type="1" start="3">
+<li>Now we can give the custom report a descriptive report name and report description. We also want to define the metric we want to see in our Y-axis. A custom statistic variable could also be here if we would have defined it as an integer rather than a string.</li>
+</ol>
+<p>For our example we want to see the Traffic of our proxy</p>
+<p>We also define the Dimensions we want to group our traffic by. By selecting multiple dimensions we can drill down our report to find more information on the traffic metric.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/99e001bb64f726ff.png"></p>
+<ol type="1" start="4">
+<li>In this lab we want to use these dimensions to demonstrate the drill down functionality. For this we chose Country, Developer App and productId as our dimensions.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/1489faa238a81b4e.png"></p>
+<ol type="1" start="5">
+<li>Take a look at the other dimensions to choose from. Besides our productID that we defined in our statistics collector policy you will find other common dimensions predefined by Apigee.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 276.00px" src="img/1bfc60aa53743599.png"></p>
+<ol type="1" start="6">
+<li>When finished click Save at the bottom right.</li>
+<li>In the report chose a proper range to filter. Make sure you are starting now or in the future and look back long enough. Maybe 1 hour as the default is too short.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/18c324172c663617.png"></p>
+<ol type="1" start="8">
+<li>Now you see the traffic grouped by our first dimension. In our case all of our traffic is coming from IE. In your case this will be different and in production this will definately be more diverse.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/8fa048c9cbdb2cfd.png"></p>
+<ol type="1" start="9">
+<li>Drill down into the report by clicking the blue column.</li>
+</ol>
+<p>Now we see the traffic split by Apps. This helps us to identify apps that are generating a lot of traffic to look closer at.</p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/f76531b011fddb27.png"></p>
+<ol type="1" start="10">
+<li>Let&#39;s look at the fg_Hipster Android App Free for example.</li>
+</ol>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/f7471e2bee6ad418.png"></p>
+<ol type="1" start="11">
+<li>Now we see the product IDs that were fetched.</li>
+</ol>
+<p>You can also download the data as CSV by clicking the download button to the right.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Get Statistics via Management API" duration="0">
+        <p>Visit the Management API documentation where you can also conveniently try out API calls:</p>
+<p><a href="https://apidocs.apigee.com/management/apis/get/organizations/%7Borg_name%7D/environments/%7Benv_name%7D/stats/%7Bdimension_name%7D-0" target="_blank">https://apidocs.apigee.com/management/apis/get/organizations/%7Borg_name%7D/environments/%7Benv_name%7D/stats/%7Bdimension_name%7D-0</a></p>
+<h3 is-upgraded><strong>Enter the values and execute an API call</strong></h3>
+<p>In the documentation you can interactively make calls to your organization to see how the results look like.</p>
+<ul>
+<li>Enter your the API call data in the blue Resource URL fields:</li>
+<li>{org_name}: your organization</li>
+<li>{env_name}: your environment</li>
+<li>{dimension_name}: apiproxy</li>
+<li>Fill in the data in the table:</li>
+<li>Select: sum(message_count)</li>
+<li>timeRange: 08/01/2019 00:00~08/30/2019 23:59</li>
+<li>Filter: (apiproxy eq &#39;weather-analytics&#39;)</li>
+</ul>
+<p>Caution: Update Time Range accordingly to have the end range date in the present.</p>
+<ul>
+<li>Authenticate with your Apigee username and password that you use to login into the Admin UI.</li>
+<li>Send a request by clicking the Send this request button</li>
+</ul>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/c62dc33c26f2028f.png"></p>
+<p class="image-container"><img alt="image alt text" style="width: 624.00px" src="img/1342f9d07543034f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary" duration="0">
+        <p>In this lab you have explored all Reports that show you the success and performance of you API Program and give you valuable insights into how to optimize your APIs.</p>
+<h2 is-upgraded><strong>Quiz</strong></h2>
+<ul>
+<li>Why did this lab use the data type string in productId although its numerical values in the API specification?</li>
+<li>What happens if you put multiple statistics collectors in the proxy flow?</li>
+</ul>
+<h2 class="checklist" is-upgraded><strong>What we&#39;ve covered</strong></h2>
+<ul class="checklist">
+<li>Overview of the built in Apigee Dashboards</li>
+<li>Modified a proxy to collect custom statistics data</li>
+<li>Create a custom report using the data from API calls and defining dimensions to drill down for more details.</li>
+</ul>
+<h2 is-upgraded><strong>References</strong></h2>
+<h3 is-upgraded><strong>Apigee Docs Links</strong></h3>
+<p><a href="https://docs.apigee.com/api-platform/analytics/use-analytics-api-measure-api-program-performance" target="_blank">https://docs.apigee.com/api-platform/analytics/use-analytics-api-measure-api-program-performance</a></p>
+<p>Analytics dashboards overview - <a href="https://docs.apigee.com/api-platform/analytics/using-analytics-dashboards" target="_blank">https://docs.apigee.com/api-platform/analytics/using-analytics-dashboards</a></p>
+<p>Exract Variables Policy - <a href="https://docs.apigee.com/api-platform/reference/policies/extract-variables-policy" target="_blank">https://docs.apigee.com/api-platform/reference/policies/extract-variables-policy</a></p>
+<p>Statistics Collector Policy - <a href="https://docs.apigee.com/api-platform/reference/policies/statistics-collector-policy" target="_blank">https://docs.apigee.com/api-platform/reference/policies/statistics-collector-policy</a></p>
+<p>Create and manage custom reports - <a href="https://docs.apigee.com/api-platform/analytics/create-custom-reports" target="_blank">https://docs.apigee.com/api-platform/analytics/create-custom-reports</a></p>
+<p>Example of custom report with statistics collector - <a href="https://docs.apigee.com/api-platform/analytics/analyze-api-message-content-using-custom-analytics" target="_blank">https://docs.apigee.com/api-platform/analytics/analyze-api-message-content-using-custom-analytics</a></p>
+<h3 is-upgraded><strong>Videos (4mv4d)</strong></h3>
+<p>Extract Variables Policy - <a href="https://www.youtube.com/watch?v=KqFpnNt_8yo" target="_blank">https://www.youtube.com/watch?v=KqFpnNt_8yo</a></p>
+<p>Measurement and KPIs for APIs - <a href="https://www.youtube.com/watch?v=x6r7xHKNINU" target="_blank">https://www.youtube.com/watch?v=x6r7xHKNINU</a></p>
+<p>Measuring and reporting the success of your API program - <a href="https://www.youtube.com/watch?v=VcNKpoakVqQ" target="_blank">https://www.youtube.com/watch?v=VcNKpoakVqQ</a></p>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
