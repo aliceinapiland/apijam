@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-12-10T19:44:05Z",
+  "updated": "2020-12-15T15:29:10Z",
   "id": "apijam-mod-1",
   "duration": 0,
   "title": "Module 1 - API Management Fundamentals",
   "authors": "Vidya Ravindran",
   "summary": "This is the supporting material for a hands-on workshop that introduces you to fundamental API Management concepts and the Apigee API Management Platform. We call this event an \"Apigee API Jam\". This module - the \"Module 1\" - focuses on giving attendees an overall understanding of how to build a successful API program with a well managed developer ecosystem. Attendees will learn how to manage their APIs across all phases of the API Lifecycle - including API design, API Security, Developer consumption, as well as API Analytics and Monitoring.",
-  "source": "1qiUcfBLD58EMrCe2tQj9r3gtinrUDtoS4V05K0Wzq-g",
+  "source": "1yFSOSY9_OOzJdGCOjaT6MyrY8Lke4vKaGvbVxnwYcLs",
   "theme": "web",
   "status": [
     "published"
