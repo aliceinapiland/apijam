@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-12-15T15:35:51Z",
-  "id": "apijam-mod-1-intro",
+  "updated": "2020-12-15T15:55:32Z",
+  "id": "apijam-mod-1-lab-3",
   "duration": 0,
-  "title": "Module 1 - API Management Fundamentals",
+  "title": "Lab 3 - Manage tiered API Product subscription through API call quotas",
   "authors": "Vidya Ravindran",
   "summary": "This is the supporting material for a hands-on workshop that introduces you to fundamental API Management concepts and the Apigee API Management Platform. We call this event an \"Apigee API Jam\". This module - the \"Module 1\" - focuses on giving attendees an overall understanding of how to build a successful API program with a well managed developer ecosystem. Attendees will learn how to manage their APIs across all phases of the API Lifecycle - including API design, API Security, Developer consumption, as well as API Analytics and Monitoring.",
-  "source": "1yFSOSY9_OOzJdGCOjaT6MyrY8Lke4vKaGvbVxnwYcLs",
+  "source": "1hTHwM59EwqI-nfQ3UFI9Jl3GdGT2XFoFQpwRGo3UIZU",
   "theme": "web",
   "status": [
     "published"
@@ -34,6 +34,6 @@
     "typtwd17",
     "web"
   ],
-  "feedback": "https://github.com/aliceinapiland/apijam/tree/master/ForCodeLabs/apijam-mod-1",
-  "url": "apijam-mod-1-intro"
+  "feedback": "https://docs.google.com/forms/d/e/1FAIpQLSfyEW7pEyVVumcBzV2UU70XDoow-fneUEApznxkhL_buTNevA/viewform?entry.1505955013=Virtual+API+Jam+-+API+Management",
+  "url": "apijam-mod-1-lab-3"
 }
