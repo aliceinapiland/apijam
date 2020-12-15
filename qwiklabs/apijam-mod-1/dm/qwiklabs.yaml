@@ -1,0 +1,14 @@
+imports:
+  - path: qwiklabs.jinja
+  - path: bootstrap.sh
+resources:
+  - name: qwiklabs
+    type: qwiklabs.jinja
+    properties:
+      #These properties are set by Qwiklabs automation
+      keyFile: '{...}' #this is the service account JSON
+      region: 'gcp-project-region'
+      zone: 'gcp-project-zone'
+      sshPubKey: 'ssh key'
+      userName: 'student email'
+      userPassword: 'student password'

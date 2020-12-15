@@ -1,0 +1,35 @@
+resources:
+- type: compute.v1.instance
+  name: lab-startup
+  properties:
+    zone: {{ properties["zone"] }}
+    machineType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ properties["zone"] }}/machineTypes/n1-standard-4
+    metadata:
+      items:
+      - key: startup-script
+        value: | {{ imports['bootstrap.sh'] |
+             replace('%keyFile%', properties["keyFile"]) |
+             replace('%userName%', properties["userName"]) |
+             replace('%userPassword%', properties["userPassword"]) |
+             replace('%zone%', properties["zone"]) |
+             replace('%region%', properties["region"]) |
+             replace('%dm_branch%', properties["dm_branch"]) |
+             replace('%dm_repo%', properties["dm_repo"]) |
+             replace('%lab_branch%', properties["lab_branch"]) |
+             replace('%lab_repo%', properties["lab_repo"]) |
+             replace('%use_real_cert%', properties["use_real_cert"]) |
+             replace('%key_pass%', properties["key_pass"]) |
+             replace('%env%', properties["env"]) |
+             indent(10) }}
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
