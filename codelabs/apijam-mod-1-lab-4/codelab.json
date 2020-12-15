@@ -1,0 +1,39 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-12-15T15:16:55Z",
+  "id": "apijam-mod-1-lab-4",
+  "duration": 0,
+  "title": "Lab 4 - Build an App Developer Experience using Apigee Integrated Developer Portals",
+  "authors": "Vidya Ravindran",
+  "summary": "This is the supporting material for a hands-on workshop that introduces you to fundamental API Management concepts and the Apigee API Management Platform. We call this event an \"Apigee API Jam\". This module - the \"Module 1\" - focuses on giving attendees an overall understanding of how to build a successful API program with a well managed developer ecosystem. Attendees will learn how to manage their APIs across all phases of the API Lifecycle - including API design, API Security, Developer consumption, as well as API Analytics and Monitoring.",
+  "source": "1Jr_ogvJcx2gGxWwptbb5wwkwWD1nT17nTanFAfjj3CY",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "cds17",
+    "chrome-dev-summit-2016",
+    "devfest18",
+    "gdd17",
+    "io2016",
+    "io2017",
+    "io2018",
+    "io2019",
+    "jsconfeu",
+    "kiosk",
+    "pwa-dev-summit",
+    "pwa-roadshow",
+    "tag-web",
+    "typtwd17",
+    "web"
+  ],
+  "feedback": "https://github.com/aliceinapiland/apijam/tree/master/ForCodeLabs/apijam-mod-1",
+  "url": "apijam-mod-1-lab-4"
+}
