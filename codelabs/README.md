@@ -1,7 +1,5 @@
 # Apigee API Jam - Codelabs
 
-## Note: For the previous version of the API Jam archived on 18th October 2019, please navigate to supporting material in the [Archives folder](./Archives/Archived_10-18-2019).
-
 This repository contains the supporting material for Apigee hands-on workshops that introduces users to API Management concepts and the Apigee API Management Platform. We call these events "**API Jams**".
 These hands-on workshops take into account the experience of hundreds customers who have used Google's Apigee platform to implement successful API programs. By the end of these workshops, attendees will walk away with practical experience using our platform, along with an understanding of its comprehensive capabilities.
 
@@ -13,7 +11,7 @@ This material is divided into different API Jam modules, based on the API Manage
 
 **Note - If you are using this repository during a virtual or in-person API Jam, please reference the appropriate module(s) based on instructor instructions.**
 
-### [Module 1 - API Management](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-1) 
+### [Module 1 - API Management](https://aliceinapiland.github.io/apijam/codelabs/apijam-mod-1/apijam-mod-1-intro/#0) 
 Contents:
 * Lab 1 - Create a Reverse Proxy with OpenAPI specification
 * Lab 2 - Apps, API Products & API Keys
@@ -23,7 +21,7 @@ Contents:
 
 ** **
 
-### [Module 2 - API Security](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-2)
+### [Module 2 - API Security](https://aliceinapiland.github.io/apijam/codelabs/apijam-mod-2/apijam-mod-2-intro/#0)
 Contents:
 * Introduction to API Security
 * Lab 1 - Throttle your API Traffic to prevent DoS, using Apigee Spike Arrest
@@ -34,7 +32,7 @@ Contents:
 
 ** **
 
-### [Module 3 - Advanced API Management](https://aliceinapiland.github.io/apijam/codelabs/modules/apijam-mod-3)
+### [Module 3 - Advanced API Management](https://aliceinapiland.github.io/apijam/codelabs/apijam-mod-3/apijam-mod-3-intro/#0)
 Contents:
 * Lab 1 - Global policy management using Shared Flows, Flow Hooks and Flow Callouts
 * Lab 2 - Build composite APIs using Service Callouts and Proxy Chaining
